@@ -63,3 +63,4 @@ typings/
 database_schema.*
 *.css
 *.css.map
+.env
