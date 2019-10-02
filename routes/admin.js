@@ -25,4 +25,10 @@ router.get('/get/users', auth.isAdmin, async function(req, res, next){
     res.send(users);
 });
 
+router.post('/change/users/auth', auth.isAdmin, async function(req, res, next){
+    await adminDB.updateUserAuth(req.body.authValue, req.body.userlist.join(','));
+    const users = await adminDB.getUserData();
+    res.send(users);
+})
+
 module.exports = router;
