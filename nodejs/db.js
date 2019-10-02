@@ -13,12 +13,7 @@ class DatabaseManager{
         try{
             const connection = await this.connect().then(conn => conn);
             try{
-                // let rows;
-                // if(args.length > 0){
-                   const [rows] = await connection.query(query, args);
-                // }else{
-                //     [rows] = await connection.query(query);
-                // }
+                const [rows] = await connection.query(query, args);
                 connection.release();
                 return rows;
             }catch(err){
