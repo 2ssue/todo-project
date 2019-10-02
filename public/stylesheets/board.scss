@@ -1,0 +1,20 @@
+$default-space: 1rem;
+
+main{
+    margin: $default-space;
+}
+
+section{
+    background-color: lightgray;
+    padding: $default-space 0;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    div{
+        background-color: white;
+        margin: $default-space;
+        padding: $default-space;
+        width: -webkit-fill-available;
+        border-radius: 10px;
+    }
+}
