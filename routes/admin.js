@@ -26,7 +26,18 @@ router.get('/get/users', auth.isAdmin, async function(req, res, next){
 });
 
 router.post('/change/users/auth', auth.isAdmin, async function(req, res, next){
-    await adminDB.updateUserAuth(req.body.authValue, req.body.userlist.join(','));
+    const auth = req.body.authValue;
+    const userList = req.body.userlist;
+    const result = await adminDB.updateUserAuth(auth, userList.join(','));
+
+    if(result.changedRows){
+        const checkUserAuthChange = userList.find(user => user === `'${req.user.userid}'`);
+        
+        if(checkUserAuthChange){
+            req.user.admin = auth;
+        }
+    }
+
     const users = await adminDB.getUserData();
     res.send(users);
 })
