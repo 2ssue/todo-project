@@ -1,0 +1,19 @@
+$default-size: 1rem;
+
+div{
+    margin: auto;
+    width: calc(#{$default-size * 30});
+    input, button{
+        border-radius: 5px;
+        width: -webkit-fill-available;
+        height: calc(#{$default-size * 3});
+        margin-bottom: $default-size;
+    }
+    input{
+        border: 1px solid lightgrey;
+        padding-left: $default-size;
+    }
+    button{
+        border: none;
+    }
+}

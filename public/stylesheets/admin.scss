@@ -1,0 +1,45 @@
+$default-space: 1rem;
+
+nav{
+    text-align: right;
+    border-bottom: 1px solid black;
+    margin-bottom: $default-space;
+    padding-bottom: calc(#{$default-space} / 2);
+    a{
+        text-decoration: none;
+        color: black;
+        margin-left: $default-space;
+    }
+    a:hover{
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}
+
+.select{
+    background-color: linen;
+}
+
+section{
+    margin: $default-space;
+}
+
+table{
+    width: -webkit-fill-available;
+    border: 1px solid grey;
+    margin-bottom: $default-space;
+    th, td{
+        border: 1px solid lightgrey;
+        text-align: center;
+        padding: calc(#{$default-space} / 2);
+        font-size: calc(#{$default-space} * 1.2);
+    }
+    th{
+        border-bottom: double grey
+    }
+}
+
+.show-right{
+    display: flex;
+    justify-content: flex-end;
+}

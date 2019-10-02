@@ -2,9 +2,24 @@ $default-size: 1rem;
 
 header{
     text-align: center;
-    margin: calc(#{$default-size * 2}) 0;
+    margin: $default-size;
+    span, a{
+        float: right;
+        color: black;
+    }
+    a{
+        text-decoration: none;
+    }
+    a:hover{
+        text-decoration: underline;
+        cursor: pointer;
+    }
 }
 
 h1{
     font-size: calc(#{$default-size * 3});
+}
+
+h2{
+    font-size: calc(#{$default-size * 2});
 }
