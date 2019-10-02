@@ -30,6 +30,7 @@ class Admin{
     renderUserData(res){
         const container = _.$('#table-container');
         const header = ['아이디', '이름', '권한'];
+        
         container.innerHTML = _.templateJsonToTable(res, header) + authElement;
         
         _.regist(_.$('table'), 'click', function(e){
@@ -63,10 +64,15 @@ class Admin{
             const auth = _.$('#select-auth').value;
             
             _.post('/admin/change/users/auth', {userlist: userlist, authValue: Number(auth)}).then(res => {
-                res.text().then(res => {
-                    this.renderUserData(res);
-                    alert(`${userlist} 권한이 변경되었습니다`);
-                });
+                if(res.redirected){
+                    alert('유효하지 않은 권한입니다');
+                    location.href = res.url;
+                }else{
+                    res.text().then(res => {
+                        this.renderUserData(res);
+                        alert(`${userlist} 권한이 변경되었습니다`);
+                    });
+                }
             });
         }else{
             alert('선택된 사용자가 없습니다');
