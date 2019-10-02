@@ -1,0 +1,10 @@
+$default-size: 1rem;
+
+header{
+    text-align: center;
+    margin: calc(#{$default-size * 2}) 0;
+}
+
+h1{
+    font-size: calc(#{$default-size * 3});
+}
