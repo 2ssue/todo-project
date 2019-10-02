@@ -21,12 +21,11 @@ router.use(passport.initialize());
 router.use(passport.session());
 auth.setPassport();
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
   if(req.user){
     res.render('board', {
       title: 'Todo Board',
-      link: '/lgout',
+      link: '/logout',
       linktext: '로그아웃',
       user: req.user.name
     });
