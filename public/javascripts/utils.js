@@ -30,4 +30,31 @@ export default class Util{
             }).catch(err => console.error(err));
         })
     }
+
+    templateJsonToTable(json, headers){
+        const array = JSON.parse(json);
+        let tableElement = '<table>';
+        
+        if(headers){
+            tableElement += '<tr>';
+            headers.forEach(element => {
+                tableElement += '<th>';
+                tableElement += element;
+                tableElement += '</th>';
+            });
+            tableElement += '</tr>';
+        }
+        
+        array.forEach(element => {
+            tableElement += '<tr>';
+            for(let key in element){
+                tableElement += `<td>${element[key]}</td>`;
+            }
+            tableElement += '</tr>';
+        });
+
+        tableElement += '</table>';
+
+        return tableElement;
+    }
 }

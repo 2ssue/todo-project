@@ -20,4 +20,9 @@ router.get('/', auth.isAdmin, function(req, res, next){
     });
 });
 
+router.get('/get/users', auth.isAdmin, async function(req, res, next){
+    const users = await adminDB.getUserData();
+    res.send(users);
+});
+
 module.exports = router;
