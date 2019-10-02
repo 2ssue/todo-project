@@ -13,7 +13,12 @@ class DatabaseManager{
         try{
             const connection = await this.connect().then(conn => conn);
             try{
-                const [rows] = await connection.query(query, args);
+                // let rows;
+                // if(args.length > 0){
+                   const [rows] = await connection.query(query, args);
+                // }else{
+                //     [rows] = await connection.query(query);
+                // }
                 connection.release();
                 return rows;
             }catch(err){
@@ -31,6 +36,13 @@ class DatabaseManager{
         const query = `SELECT userid, name, admin FROM USER WHERE userid = ? AND password = ?`;
         const result = await this.query(query, userId, password);
         
+        return result;
+    }
+
+    async getUserData(){
+        const query = `SELECT userid, name, CASE WHEN admin > 0 THEN '관리자' ELSE '사용자' END AS auth FROM USER;`;
+        const result = await this.query(query);
+
         return result;
     }
 }
