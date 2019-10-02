@@ -23,19 +23,20 @@ auth.setPassport();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  let renderData = {
-    title: 'Todo',
-    link: '/login',
-    linktext: '로그인'
-  };
-
   if(req.user){
-    renderData.user = req.user.name;
-    renderData.link = '/logout';
-    renderData.linktext = '로그아웃';
+    res.render('board', {
+      title: 'Todo Board',
+      link: '/lgout',
+      linktext: '로그아웃',
+      user: req.user.name
+    });
+  }else{
+    res.render('index', {
+      title: 'Todo',
+      link: '/login',
+      linktext: '로그인'
+    });
   }
-
-  res.render('index', renderData);
 });
 
 router.get('/login', function(req, res, next) {
