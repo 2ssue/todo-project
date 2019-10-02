@@ -29,8 +29,8 @@ class DatabaseManager{
 
     async findUserById(userId, password){
         const query = `SELECT userid, name, admin FROM USER WHERE userid = ? AND password = ?`;
-
         const result = await this.query(query, userId, password);
+        
         return result;
     }
 }
