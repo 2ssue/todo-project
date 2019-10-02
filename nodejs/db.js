@@ -45,6 +45,13 @@ class DatabaseManager{
 
         return result;
     }
+
+    async updateUserAuth(auth, users){
+        const query = `UPDATE USER SET admin=${auth} WHERE userid IN (${users})`;
+        const result = await this.query(query);
+
+        return result;
+    }
 }
 
 module.exports = DatabaseManager;
