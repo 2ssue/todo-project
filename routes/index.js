@@ -24,14 +24,14 @@ auth.setPassport();
 router.get('/', function(req, res, next) {
   if(req.user){
     res.render('board', {
-      title: 'Todo Board',
+      title: 'TODO LIST',
       link: '/logout',
       linktext: '로그아웃',
-      user: req.user.name
+      user: req.user.username
     });
   }else{
     res.render('index', {
-      title: 'Todo',
+      title: 'TODO LIST',
       link: '/login',
       linktext: '로그인'
     });
@@ -40,7 +40,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/login', function(req, res, next) {
   res.render('login', {
-      title: 'Login', 
+      title: 'LOGIN', 
       link: '/',
       linktext: '홈으로'
   });
