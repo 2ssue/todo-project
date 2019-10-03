@@ -5,16 +5,23 @@ main{
 }
 
 section{
-    background-color: lightgray;
+    clear: both;
     padding: $default-space 0;
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
+    min-height: 80vh;
     div{
-        background-color: white;
+        background-color: rgb(231, 231, 231);
         margin: $default-space;
         padding: $default-space;
         width: -webkit-fill-available;
         border-radius: 10px;
+        border: 1px solid lightgrey;
     }
+}
+
+span{
+    float: right;
+    margin-right: $default-space;
 }
