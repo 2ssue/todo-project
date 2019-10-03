@@ -45,6 +45,13 @@ class boardTable extends DatabaseManager{
         return result;
     }
 
+    async updateCardState(cardNum, state){
+        const query = `UPDATE BOARD SET state=? WHERE card_id=?`;
+        const result = await this.query(query, state, cardNum);
+
+        return result;
+    }
+
     async deleteCard(cardNum){
         const query = `DELETE FROM BOARD WHERE card_id=?`
         const result = await this.query(query, cardNum);
