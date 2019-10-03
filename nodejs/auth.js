@@ -60,6 +60,14 @@ const isLogined = (req, res, next) => {
     }
 }
 
+const canUpdate = (req, res, next) => {
+    if(req.user['board_auth'] === 'w'){
+        next();
+    }else{
+        next('Unauthorized');
+    }
+}
+
 module.exports = {
-    setPassport, isAdmin, isLogined
+    setPassport, isAdmin, isLogined, canUpdate
 }

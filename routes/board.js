@@ -17,16 +17,18 @@ router.get('/:boardId', auth.isLogined, async function(req, res, next){
 
    if(boardId === req.user['board_id']){
        const cards = await userDB.getUserCards(req.user.userid);
+       req.user['board_auth'] = 'w';
        res.send(cards);
    }else{ //템플릿을 쏴줘야함
         const result = await userDB.checkBoardAuth(boardId, req.user.userid);
 
         if(result){
             const cards = await userDB.getOtherUserCards(boardId);
+            req.user['board_auth'] = result['access_auth']; //권한 값에 따라 변경
             res.send(cards);
         }else{
             res.render('error', {
-                message: `😰함께 볼 수 없는 페이지입니다`,
+                message: `😰함께 볼 수 없는 보드입니다`,
                 error: {
                     status: `Error Code 401`,
                     stack: ``
@@ -34,6 +36,22 @@ router.get('/:boardId', auth.isLogined, async function(req, res, next){
             });
         }
    }
+});
+
+router.post('/update/card/:cardNum', auth.canUpdate, async function(req, res, next){
+    const parseUrl = req.url.split('/');
+    const cardNum = parseUrl.pop();
+
+    const result = await userDB.updateCard(cardNum, req.body.content);
+    if(result.changedRows){
+        res.send(JSON.stringify({
+            result: 'success'
+        }));
+    }else{
+        res.send(JSON.stringify({
+            result: 'fail'
+        }));
+    }
 });
 
 module.exports = router;

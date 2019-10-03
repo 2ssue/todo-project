@@ -37,6 +37,13 @@ class boardTable extends DatabaseManager{
 
         return result;
     }
+
+    async updateCard(cardNum, content){
+        const query = `UPDATE BOARD SET content=? WHERE card_id=?`;
+        const result = await this.query(query, content, cardNum);
+
+        return result;
+    }
 }
 
 module.exports = boardTable;
