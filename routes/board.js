@@ -57,6 +57,25 @@ router.post('/:boardId/update/card/:cardNum', auth.canUpdate, async function(req
     }
 });
 
+router.post('/:boardId/update/card/state/:cardNum', auth.canUpdate, async function(req, res, next){
+    const parseUrl = req.url.split('/');
+    const cardNum = parseUrl.pop();
+    const boardId = parseUrl[1];
+
+    const result = await boardDB.updateCardState(cardNum, req.body.moveState);
+
+    if(result.changedRows){
+        boardDB.addLog(boardId, req.body.content, req.user.userid, 'moved', req.body.prevState, req.body.moveState);
+        res.send(JSON.stringify({
+            result: 'success'
+        }));
+    }else{
+        res.send(JSON.stringify({
+            result: 'fail'
+        }));
+    }
+})
+
 router.post('/:boardId/delete/card/:cardNum', auth.canUpdate, async function(req, res, next){
     const parseUrl = req.url.split('/');
     const cardNum = parseUrl.pop();
