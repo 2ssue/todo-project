@@ -55,4 +55,20 @@ router.post('/update/card/:cardNum', auth.canUpdate, async function(req, res, ne
     }
 });
 
+router.get('/delete/card/:cardNum', auth.canUpdate, async function(req, res, next){
+    const parseUrl = req.url.split('/');
+    const cardNum = parseUrl.pop();
+
+    const result = await boardDB.deleteCard(cardNum);
+
+    if(result.affectedRows){
+        res.send(JSON.stringify({
+            result: 'success'
+        }))
+    }else{
+        res.send(JSON.stringify({
+            result: 'fail'
+        }));
+    }
+});
 module.exports = router;
