@@ -76,7 +76,7 @@ router.post('/:boardId/delete/card/:cardNum', auth.canUpdate, async function(req
     }
 });
 
-router.post('/:boardId/add/card', async function(req, res, next){
+router.post('/:boardId/add/card', auth.canUpdate, async function(req, res, next){
     const parseUrl = req.url.split('/');
     const boardId = parseUrl[1];
     const body = req.body;
