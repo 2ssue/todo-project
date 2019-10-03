@@ -65,6 +65,13 @@ class boardTable extends DatabaseManager{
 
         return result;
     }
+
+    async addLog(boardId, cardContent, userId, action, from, to){
+        const query = `INSERT INTO BOARD_LOG (board_id, card, userid, action, prev, at) VALUES (?,?,?,?,?,?)`;
+        const result = await this.query(query, boardId, cardContent, userId, action, from, to);
+
+        return result;
+    }
 }
 
 module.exports = boardTable;

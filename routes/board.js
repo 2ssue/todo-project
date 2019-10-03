@@ -38,13 +38,15 @@ router.get('/:boardId', auth.isLogined, async function(req, res, next){
    }
 });
 
-router.post('/update/card/:cardNum', auth.canUpdate, async function(req, res, next){
+router.post('/:boardId/update/card/:cardNum', auth.canUpdate, async function(req, res, next){
     const parseUrl = req.url.split('/');
     const cardNum = parseUrl.pop();
+    const boardId = parseUrl[1];
 
     const result = await boardDB.updateCardContent(cardNum, req.body.content);
     
     if(result.changedRows){
+        boardDB.addLog(boardId, req.body.content, req.user.userid, 'update', '', '');
         res.send(JSON.stringify({
             result: 'success'
         }));
@@ -55,16 +57,18 @@ router.post('/update/card/:cardNum', auth.canUpdate, async function(req, res, ne
     }
 });
 
-router.get('/delete/card/:cardNum', auth.canUpdate, async function(req, res, next){
+router.post('/:boardId/delete/card/:cardNum', auth.canUpdate, async function(req, res, next){
     const parseUrl = req.url.split('/');
     const cardNum = parseUrl.pop();
+    const boardId = parseUrl[1];
 
     const result = await boardDB.deleteCard(cardNum);
 
     if(result.affectedRows){
+        boardDB.addLog(boardId, req.body.content, req.user.userid, 'delete', '', '');
         res.send(JSON.stringify({
             result: 'success'
-        }))
+        }));
     }else{
         res.send(JSON.stringify({
             result: 'fail'
@@ -72,18 +76,21 @@ router.get('/delete/card/:cardNum', auth.canUpdate, async function(req, res, nex
     }
 });
 
-router.post('/add/card', auth.canUpdate, async function(req, res, next){
+router.post('/:boardId/add/card', async function(req, res, next){
+    const parseUrl = req.url.split('/');
+    const boardId = parseUrl[1];
     const body = req.body;
-    const result = await boardDB.addCard(body.boardId, body.content, body['file_src'], body['prev_card']);
+    const result = await boardDB.addCard(boardId, body.content, body['file_src'], body['prev_card']);
 
     if(result.affectedRows){
+        boardDB.addLog(boardId, body.content, req.user.userid, 'add', '', 'todo');
         res.send(JSON.stringify({
             result: 'success'
-        }))
+        }));
     }else{
         res.send(JSON.stringify({
             result: 'fail'
-        }))
+        }));
     }
 });
 
