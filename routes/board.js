@@ -42,7 +42,7 @@ router.post('/update/card/:cardNum', auth.canUpdate, async function(req, res, ne
     const parseUrl = req.url.split('/');
     const cardNum = parseUrl.pop();
 
-    const result = await boardDB.updateCard(cardNum, req.body.content);
+    const result = await boardDB.updateCardContent(cardNum, req.body.content);
     
     if(result.changedRows){
         res.send(JSON.stringify({

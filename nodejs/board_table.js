@@ -38,7 +38,7 @@ class boardTable extends DatabaseManager{
         return result;
     }
 
-    async updateCard(cardNum, content){
+    async updateCardCotent(cardNum, content){
         const query = `UPDATE BOARD SET content=? WHERE card_id=?`;
         const result = await this.query(query, content, cardNum);
 
@@ -53,7 +53,7 @@ class boardTable extends DatabaseManager{
     }
 
     async addCard(boardId, content, file_src, prev_card){
-        const query = `INSERT INTO BOARD ('board_id', 'state', 'content', 'file_src', 'prev_card_id') VALUES(?,'todo',?,?,?)`;
+        const query = `INSERT INTO BOARD (board_id, state, content, file_src, prev_card_id) VALUES(?,'todo',?,?,?)`;
         const result = await this.query(query, boardId, content, file_src, prev_card);
 
         return result;
