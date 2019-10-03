@@ -2,4 +2,4 @@
 
 ## Project Structure
 ### Database
-![database_schema](https://user-images.githubusercontent.com/42017052/65967201-33681100-e49c-11e9-9391-311577019429.png)
+![database_schema](https://user-images.githubusercontent.com/42017052/66135659-43ffbf00-e635-11e9-8b95-8c58bcaca475.png)
