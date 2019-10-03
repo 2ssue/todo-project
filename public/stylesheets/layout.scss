@@ -3,6 +3,7 @@ $default-size: 1rem;
 header{
     text-align: center;
     margin: $default-size;
+    height: calc(#{$default-size} * 6);
     span, a{
         float: right;
         color: black;
