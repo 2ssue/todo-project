@@ -71,4 +71,20 @@ router.get('/delete/card/:cardNum', auth.canUpdate, async function(req, res, nex
         }));
     }
 });
+
+router.post('/add/card', auth.canUpdate, async function(req, res, next){
+    const body = req.body;
+    const result = await boardDB.addCard(body.boardId, body.content, body['file_src'], body['prev_card']);
+
+    if(result.affectedRows){
+        res.send(JSON.stringify({
+            result: 'success'
+        }))
+    }else{
+        res.send(JSON.stringify({
+            result: 'fail'
+        }))
+    }
+});
+
 module.exports = router;
