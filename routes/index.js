@@ -27,7 +27,8 @@ router.get('/', function(req, res, next) {
       title: 'TODO LIST',
       link: '/logout',
       linktext: '로그아웃',
-      user: req.user.username
+      user: req.user.name,
+      board_id: req.user['board_id']
     });
   }else{
     res.render('index', {

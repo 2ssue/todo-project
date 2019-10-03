@@ -2,6 +2,7 @@ extends layout
 
 block content
     link(rel='stylesheet' href='/stylesheets/board.css')
+    span#board_id=board_id
     section#board
         div.column
             h3 TODO
@@ -9,4 +10,6 @@ block content
             h3 DOING
         div.column
             h3 DONE
+        div.column
+            h3 +
     script(type='module' src='/javascripts/board.js')
