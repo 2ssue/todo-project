@@ -51,6 +51,13 @@ class boardTable extends DatabaseManager{
 
         return result;
     }
+
+    async addCard(boardId, content, file_src, prev_card){
+        const query = `INSERT INTO BOARD ('board_id', 'state', 'content', 'file_src', 'prev_card_id') VALUES(?,'todo',?,?,?)`;
+        const result = await this.query(query, boardId, content, file_src, prev_card);
+
+        return result;
+    }
 }
 
 module.exports = boardTable;
