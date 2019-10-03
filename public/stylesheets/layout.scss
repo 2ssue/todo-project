@@ -26,3 +26,11 @@ h1{
 h2{
     font-size: calc(#{$default-size * 2});
 }
+
+footer{
+    background-color: black;
+    color: white;
+    text-align: center;
+    width: -webkit-fill-available;
+    padding: $default-size;
+}
