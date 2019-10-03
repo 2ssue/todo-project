@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const DatabaseManager = require('../nodejs/db.js');
+const DatabaseManager = require('../nodejs/user_table.js');
 const auth = require('../nodejs/auth.js')
 require('dotenv').config();
 
