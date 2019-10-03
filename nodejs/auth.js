@@ -46,6 +46,20 @@ const isAdmin = (req, res, next) => {
     }
 }
 
+const isLogined = (req, res, next) => {
+    if(req.user){
+        next();
+    }else{
+        res.render('error', {
+            message: `😰로그인이 필요합니다`,
+            error: {
+                status: `Error Code 401`,
+                stack: ``
+            }
+        });
+    }
+}
+
 module.exports = {
-    setPassport, isAdmin
+    setPassport, isAdmin, isLogined
 }
