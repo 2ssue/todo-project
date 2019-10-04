@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    link(rel='stylesheet' href='./stylesheets/signin.css')
+    div
+        input#userid.input(type='text' placeholder='아이디')
+    div
+        input#password.input(type='password' placeholder='비밀번호')
+    div
+        input#password-check.input(type='password' placeholder='비밀번호 확인')
+    div
+        input#name.input(type='text' placeholder='이름')
+    div
+        button(type='button') 회원가입
+
+    script(type='module' src='./javascripts/signin.js')

@@ -26,6 +26,13 @@ class userTable extends DatabaseManager{
         return result;
     }
 
+    async insertUser(userId, password, name){
+        const query = `INSERT INTO USER (userid, password, name) VALUES (?,?,?)`;
+        const result = await this.query(query, userId, password, name);
+
+        return result;
+    }
+
     async deleteUser(userId){
         let query = `DELETE BOARD_LIST FROM BOARD_LIST LEFT JOIN USER ON BOARD_LIST.board_id=USER.board_id WHERE userid=?`;
         let result = await this.query(query, userId);
