@@ -39,23 +39,24 @@ const setPassport = () => {
 }
 
 const isAdmin = (req, res, next) => {
-    if(req.user.admin){
+    if(req.user && req.user.admin){
         next();
-    }else{
-        res.redirect('/');
     }
+    
+    next({
+        message: 'Unauthorized User',
+        status: 401
+    });
 }
 
 const isLogined = (req, res, next) => {
     if(req.user){
         next();
     }else{
-        res.render('error', {
+        next({
             message: `😰로그인이 필요합니다`,
-            error: {
-                status: `Error Code 401`,
-                stack: ``
-            }
+            status: 401,
+            stack: ``
         });
     }
 }
