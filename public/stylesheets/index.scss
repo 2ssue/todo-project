@@ -1,8 +1,28 @@
+$default-size: 1rem;
+
 main{
     text-align: center;
     p{
-        margin-top: 2rem;
+        margin: calc(#{$default-size * 2}) 0;
     }
+}
+
+a{
+    text-decoration: none;
+}
+
+a:hover, button:hover{
+    cursor: pointer;
+}
+
+button{
+    display: block;
+    margin: auto;
+    margin-bottom: $default-size;
+    width: calc(#{$default-size * 25});
+    height: calc(#{$default-size * 3});
+    border-radius: 5px;
+    border: none;
 }
 
 footer{
