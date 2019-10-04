@@ -40,6 +40,20 @@ router.post('/change/users/auth', auth.isAdmin, async function(req, res, next){
 
     const users = await adminDB.getUserData();
     res.send(users);
+});
+
+router.post('/delete/user', auth.isAdmin, async function(req, res, next){
+    const user = req.body.userId;
+    const result = await adminDB.deleteUser(user);
+
+    if(result.affectedRows){
+        const users = await adminDB.getUserData();
+        res.send(users);
+    }else{
+        res.send(JSON.stringify({
+            result: 'fail'
+        }))
+    }
 })
 
 module.exports = router;

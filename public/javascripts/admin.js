@@ -8,6 +8,7 @@ const authElement =
         <option value='1'>관리자</option>
     </select>
     <input type='button' value='권한 변경' id='change-auth'>
+    <input type='button' value='삭제' id='delete-user'>
 </div>`;
 
 class Admin{
@@ -37,7 +38,8 @@ class Admin{
             this.selectUser(e);
         }.bind(this));
 
-        _.regist(_.$('#change-auth'), 'click', this.changeUserAuth.bind(this));      
+        _.regist(_.$('#change-auth'), 'click', this.changeUserAuth.bind(this));
+        _.regist(_.$('#delete-user'), 'click', this.deleteUser.bind(this));     
     }
 
     selectUser(event){
@@ -51,6 +53,34 @@ class Admin{
             }else{
                 parent.classList.add('select');
             }
+        }
+    }
+
+    deleteUser(){
+        const selectedUser = _.$$('.select');
+        if(selectedUser.length > 1){
+            alert('유저 삭제는 한명씩만 가능합니다');
+            return;
+        }
+
+        if(selectedUser.length > 0){
+            const userId = selectedUser[0].firstElementChild.innerText;
+
+            _.post('/admin/delete/user', {userId: userId}).then(res => {
+                if(res.redirected){
+                    alert('유효하지 않은 권한입니다');
+                    location.href = res.url;
+                }else{
+                    res.text().then(res => {
+                        if(JSON.parse(res).result === 'fail'){
+                            alert('유저 삭제 실패');
+                        }else{
+                            this.renderUserData(res);
+                            alert(`${userId} 유저가 삭제되었습니다`);
+                        }
+                    });
+                }
+            })
         }
     }
 
