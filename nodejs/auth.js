@@ -41,12 +41,12 @@ const setPassport = () => {
 const isAdmin = (req, res, next) => {
     if(req.user && req.user.admin){
         next();
+    }else{
+        next({
+            message: 'Unauthorized User',
+            status: 401
+        });
     }
-    
-    next({
-        message: 'Unauthorized User',
-        status: 401
-    });
 }
 
 const isLogined = (req, res, next) => {
