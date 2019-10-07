@@ -25,15 +25,9 @@ router.get('/:boardId/data', async function(req, res, next){
             const cards = await boardDB.getUserCards(boardId);
             res.send(cards);
         }else{
-            res.render('error', {
-                title: `ERROR`,
-                link: `/`,
-                link_text: '홈으로',
+            next({
                 message: `😰함께 볼 수 없는 보드입니다`,
-                error: {
-                    status: `401`,
-                    stack: ``
-                }
+                status: 401
             });
         }
     }
@@ -49,15 +43,9 @@ router.get('/:boardId', async function(req, res, next){
        if(auth){
            req.user['board_auth'] = `${boardId}/${auth}`;
        }else{
-           res.render('error', {
-                title: `ERROR`,
-                link: `/`,
-                link_text: '홈으로',
+            next({
                 message: `😰함께 볼 수 없는 보드입니다`,
-                error: {
-                    status: `401`,
-                    stack: ``
-                }
+                status: 401
             });
             return;
        }
