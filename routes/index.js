@@ -23,13 +23,7 @@ auth.setPassport();
 
 router.get('/', function(req, res, next) {
   if(req.user){
-    res.render('board', {
-      title: 'TODO LIST',
-      link: '/logout',
-      linktext: '로그아웃',
-      user: req.user.name,
-      board_id: req.user['board_id']
-    });
+    res.redirect(`/board/${req.user.userid}`);
   }else{
     res.render('index', {
       title: 'TODO LIST',
