@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const DatabaseManager = require('../nodejs/user_table.js');
+const UserDatabaseManager = require('../nodejs/user_table.js');
+const BoardDatabaseManager = require('../nodejs/board_table.js');
 const auth = require('../nodejs/auth.js')
 require('dotenv').config();
 
-const adminDB = new DatabaseManager({
+const userDB = new UserDatabaseManager({
     host: process.env.DB_HOST,
     user: process.env.DB_ADMIN,
     password: process.env.DB_ADMINPASS,
@@ -31,10 +32,10 @@ router.post('/', async function(req, res, next){
     const result = await userDB.insertUser(body.userid, body.password, body.name);   
     if(result.affectedRows){
         const result = await boardDB.addBoard(body.userid);
-    if(result.affectedRows){
-        res.send(JSON.stringify({
-            result: 'success'
-        }));
+        if(result.affectedRows){
+            res.send(JSON.stringify({
+                result: 'success'
+            }));
             return true;
         }
     }
@@ -42,7 +43,6 @@ router.post('/', async function(req, res, next){
     res.send(JSON.stringify({
         result: 'fail'
     }));
-    }
 })
 
 module.exports = router;
