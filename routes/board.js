@@ -11,7 +11,9 @@ const boardDB = new DatabaseManager({
     database: process.env.DB_DATABASE
 });
 
-router.get('/:boardId/data', auth.isLogined, async function(req, res, next){
+router.use(auth.isLogined);
+
+router.get('/:boardId/data', async function(req, res, next){
     const boardId = req.url.split('/')[1];
     
     if(req.user['board_auth'].split('/')[0] === boardId){
@@ -37,7 +39,7 @@ router.get('/:boardId/data', auth.isLogined, async function(req, res, next){
     }
 });
 
-router.get('/:boardId', auth.isLogined, async function(req, res, next){
+router.get('/:boardId', async function(req, res, next){
     const boardId = req.url.split('/').pop();
 
     if(boardId === req.user.userid){
