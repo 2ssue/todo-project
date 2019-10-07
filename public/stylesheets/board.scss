@@ -1,21 +1,22 @@
-$default-space: 1rem;
+$default-size: 1rem;
 
 main{
-    margin: $default-space;
+    margin: $default-size;
 }
 
 section{
-    clear: both;
-    padding: $default-space 0;
     border-radius: 5px;
     display: flex;
-    justify-content: space-between;
+    flex-flow: wrap;
     min-height: 80vh;
-    div{
-        background-color: rgb(231, 231, 231);
-        margin: $default-space;
-        padding: $default-space;
+    margin-top: $default-size;
+
+    .column{
+        background-color: whitesmoke;
+        margin: $default-size $default-size 0 0;
+        padding: $default-size;
         width: -webkit-fill-available;
+        max-width: 20rem;
         border-radius: 10px;
         border: 1px solid lightgrey;
     }
@@ -23,5 +24,4 @@ section{
 
 span{
     float: right;
-    margin-right: $default-space;
 }
