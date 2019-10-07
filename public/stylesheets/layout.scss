@@ -1,12 +1,13 @@
 $default-size: 1rem;
 
 header{
-    text-align: center;
-    margin: $default-size;
-    height: calc(#{$default-size} * 6);
+    padding: $default-size;
+    margin-bottom: $default-size;
+    border-bottom: 1px solid;
     span, a{
         float: right;
         color: black;
+        margin-left: $default-size;
     }
     a{
         text-decoration: none;
@@ -15,13 +16,17 @@ header{
         text-decoration: underline;
         cursor: pointer;
     }
-    h1{
-        clear: both;
-    }
 }
 
-h1{
-    font-size: calc(#{$default-size * 3});
+button, input{
+    font-family: inherit;
+}
+
+button, input[type="button"]{
+    color: white;
+    background-color: gray;
+    border: 1px solid gray;
+    border-radius: 5px;
 }
 
 h2{
@@ -29,9 +34,14 @@ h2{
 }
 
 footer{
-    background-color: black;
-    color: white;
-    text-align: center;
+    background-color: gray;
+    color: floralwhite;
+    font-size: calc(#{$default-size} * 0.8);
     width: -webkit-fill-available;
     padding: $default-size;
+}
+
+.show-right{
+    display: flex;
+    justify-content: flex-end;
 }
