@@ -21,16 +21,27 @@ router.get('/', function(req, res, next){
 
 router.post('/', async function(req, res, next){
     const body = req.body;
-    const result = await adminDB.insertUser(body.userid, body.password, body.name);
-    
+    const boardDB = new BoardDatabaseManager({
+        host: process.env.DB_HOST,
+        user: process.env.DB_ADMIN,
+        password: process.env.DB_ADMINPASS,
+        database: process.env.DB_DATABASE
+    });
+
+    const result = await userDB.insertUser(body.userid, body.password, body.name);   
+    if(result.affectedRows){
+        const result = await boardDB.addBoard(body.userid);
     if(result.affectedRows){
         res.send(JSON.stringify({
             result: 'success'
         }));
-    }else{
-        res.send(JSON.stringify({
-            result: 'fail'
-        }));
+            return true;
+        }
+    }
+
+    res.send(JSON.stringify({
+        result: 'fail'
+    }));
     }
 })
 

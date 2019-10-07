@@ -28,7 +28,7 @@ class userTable extends DatabaseManager{
 
     async insertUser(userId, password, name){
         const query = `INSERT INTO USER (userid, password, name) VALUES (?,?,?)`;
-        const result = await this.query(query, userId, password, name);
+        const result = await this.query(query, userId, password, name, userId);
 
         return result;
     }
