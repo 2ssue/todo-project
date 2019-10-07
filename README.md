@@ -31,7 +31,7 @@ $ npm start
 └─views
 ```
 ### Database
-![database_schema](https://user-images.githubusercontent.com/42017052/66135659-43ffbf00-e635-11e9-8b95-8c58bcaca475.png)
+![database_schema](https://user-images.githubusercontent.com/42017052/66306129-d6f16f80-e93b-11e9-971f-45c076d5ec89.png)
 
 ## Tech
 module name|description|
