@@ -46,7 +46,11 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {
+    title: res.locals.error.title,
+    link: res.locals.error.link,
+    linktext: res.locals.error.link_text
+  });
 });
 
 module.exports = app;

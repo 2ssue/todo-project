@@ -45,7 +45,10 @@ const isAdmin = (req, res, next) => {
         res.redirect('/');
     }else{
         next({
-            message: 'Unauthorized User',
+            title: `ERROR`,
+            link: `/`,
+            link_text: '홈으로',
+            message: '😅접근 권한이 없습니다',
             status: 401
         });
     }
@@ -56,6 +59,9 @@ const isLogined = (req, res, next) => {
         next();
     }else{
         next({
+            title: `ERROR`,
+            link: `/`,
+            link_text: '홈으로',
             message: `😰로그인이 필요합니다`,
             status: 401,
             stack: ``
@@ -68,7 +74,10 @@ const canUpdate = (req, res, next) => {
         next();
     }else{
         next({
-            message: 'Unauthorized User',
+            title: `ERROR`,
+            link: `/`,
+            link_text: '홈으로',
+            message: '😅접근 권한이 없습니다',
             status: 401
         });
     }
