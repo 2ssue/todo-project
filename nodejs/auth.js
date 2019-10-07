@@ -41,6 +41,8 @@ const setPassport = () => {
 const isAdmin = (req, res, next) => {
     if(req.user && req.user.admin){
         next();
+    }else if(req.user){
+        res.redirect('/');
     }else{
         next({
             message: 'Unauthorized User',
