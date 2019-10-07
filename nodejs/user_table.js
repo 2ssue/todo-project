@@ -34,13 +34,8 @@ class userTable extends DatabaseManager{
     }
 
     async deleteUser(userId){
-        let query = `DELETE BOARD_LIST FROM BOARD_LIST LEFT JOIN USER ON BOARD_LIST.board_id=USER.board_id WHERE userid=?`;
-        let result = await this.query(query, userId);
-        
-        if(result){
-            query = `DELETE FROM USER WHERE userid=?`;
-            result = await this.query(query, userId);
-        }
+        const query = `DELETE FROM USER WHERE userid=?`;
+        const result = await this.query(query, userId);
 
         return result;
     }
