@@ -26,13 +26,6 @@ class boardTable extends DatabaseManager{
         }
     }
 
-    async getOtherUserCards(boardId){
-        const query = `SELECT * FROM BOARD WHERE board_id= ?`;
-        const result = await this.query(query, boardId);
-
-        return result;
-    }
-
     async updateCardContent(cardNum, content){
         const query = `UPDATE BOARD SET content=? WHERE card_id=?`;
         const result = await this.query(query, content, cardNum);
