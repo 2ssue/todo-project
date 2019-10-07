@@ -1,14 +1,14 @@
-$default-space: 1rem;
+$default-size: 1rem;
 
 nav{
     text-align: right;
-    border-bottom: 1px solid black;
-    margin-bottom: $default-space;
-    padding-bottom: calc(#{$default-space} / 2);
+    border-bottom: 1px solid lightgrey;
+    margin: $default-size 0;
+    padding-bottom: calc(#{$default-size} / 2);
     a{
         text-decoration: none;
-        color: black;
-        margin-left: $default-space;
+        color: gray;
+        margin-left: $default-size;
     }
     a:hover{
         cursor: pointer;
@@ -16,30 +16,37 @@ nav{
     }
 }
 
-.select{
-    background-color: linen;
+h2{
+    display: inline-block;
 }
 
 section{
-    margin: $default-space;
+    margin: $default-size;
+    button, input{
+        margin-left: calc(#{$default-size} / 2);
+    }
 }
 
 table{
     width: -webkit-fill-available;
     border: 1px solid grey;
-    margin-bottom: $default-space;
+    margin-bottom: $default-size;
     th, td{
         border: 1px solid lightgrey;
         text-align: center;
-        padding: calc(#{$default-space} / 2);
-        font-size: calc(#{$default-space} * 1.2);
+        padding: calc(#{$default-size} / 2);
+        font-size: calc(#{$default-size} * 1.2);
     }
     th{
         border-bottom: double grey
     }
 }
 
-.show-right{
-    display: flex;
-    justify-content: flex-end;
+.select{
+    background-color: linen;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
 }
