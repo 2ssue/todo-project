@@ -8,24 +8,19 @@ class boardTable extends DatabaseManager{
         super(dbpool);
     }
 
-    async getUserCards(userId){
-        const query = `SELECT BOARD.* FROM BOARD LEFT JOIN USER ON BOARD.board_id=USER.board_id WHERE userid = ?`;
-        const result = await this.query(query, userId);
+    async getUserCards(boardId){
+        const query = `SELECT * FROM BOARD WHERE board_id=?`
+        const result = await this.query(query, boardId);
 
         return result;
     }
 
     async checkBoardAuth(boardId, userId){
-        const query = `SELECT access_state FROM BOARD_LIST WHERE board_id=?`;
-        const result = await this.query(query, boardId);
+        const query = `SELECT l.access_state, a.userid, a.access_auth FROM BOARD_LIST l LEFT JOIN BOARD_AUTH a ON l.board_id=a.board_id WHERE l.board_id=? AND a.userid=?`
+        const results = await this.query(query, boardId, userId);
         
-        if(result[0].access_state === PUBLIC_ACCESS_AUTH){
-            return true;
-        }else if(result[0].access_state === PRIVATE_ACCESS_AUTH){
-            const query = `SELECT access_auth FROM BOARD_AUTH WHERE board_id=? AND userid=?`;
-            const result = await this.query(query, boardId, userId);
-            
-            return result[0];
+        if(results[0]){
+            return results[0].access_auth;
         }else{
             return false;
         }

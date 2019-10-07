@@ -11,31 +11,62 @@ const boardDB = new DatabaseManager({
     database: process.env.DB_DATABASE
 });
 
-router.get('/:boardId', auth.isLogined, async function(req, res, next){
-   const parseUrl = req.url.split('/');
-   const boardId = parseUrl.pop();
-
-   if(boardId === req.user['board_id']){
-       const cards = await boardDB.getUserCards(req.user.userid);
-       req.user['board_auth'] = 'w';
-       res.send(cards);
-   }else{ //템플릿을 쏴줘야함
+router.get('/:boardId/data', auth.isLogined, async function(req, res, next){
+    const boardId = req.url.split('/')[1];
+    
+    if(req.user['board_auth'].split('/')[0] === boardId){
+        const cards = await boardDB.getUserCards(boardId);
+        res.send(cards);
+    }else{
         const result = await boardDB.checkBoardAuth(boardId, req.user.userid);
-
         if(result){
-            const cards = await boardDB.getOtherUserCards(boardId);
-            req.user['board_auth'] = result['access_auth']; //권한 값에 따라 변경
+            const cards = await boardDB.getUserCards(boardId);
             res.send(cards);
         }else{
             res.render('error', {
+                title: `ERROR`,
+                link: `/`,
+                link_text: '홈으로',
                 message: `😰함께 볼 수 없는 보드입니다`,
                 error: {
-                    status: `Error Code 401`,
+                    status: `401`,
                     stack: ``
                 }
             });
         }
-   }
+    }
+});
+
+router.get('/:boardId', auth.isLogined, async function(req, res, next){
+    const boardId = req.url.split('/').pop();
+
+    if(boardId === req.user.userid){
+       req.user['board_auth'] = `${boardId}/w`;
+    }else{
+       const auth = await boardDB.checkBoardAuth(boardId, req.user.userid);
+       if(auth){
+           req.user['board_auth'] = `${boardId}/${auth}`;
+       }else{
+           res.render('error', {
+                title: `ERROR`,
+                link: `/`,
+                link_text: '홈으로',
+                message: `😰함께 볼 수 없는 보드입니다`,
+                error: {
+                    status: `401`,
+                    stack: ``
+                }
+            });
+            return;
+       }
+    }
+
+    res.render('board', {
+        title: 'TODO LIST',
+        link: '/logout',
+        linktext: '로그아웃',
+        user: `${req.user.name}님`
+    });
 });
 
 router.post('/:boardId/update/card/:cardNum', auth.canUpdate, async function(req, res, next){
@@ -112,5 +143,13 @@ router.post('/:boardId/add/card', auth.canUpdate, async function(req, res, next)
         }));
     }
 });
+
+router.get('/:boardId/log', auth.canUpdate, async function(req, res, next){
+    const parseUrl = req.url.split('/');
+    const boardId = parseUrl[1];
+    const result = await boardDB.query(`SELECT * FROM BOARD_LOG WHERE board_id='${boardId}'`);
+
+    res.send(result);
+})
 
 module.exports = router;

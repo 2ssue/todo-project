@@ -8,13 +8,15 @@ class Board{
     }
 
     registEvent(){
-        _.regist(document, 'DOMContentLoaded', this.getCardList);
+        _.regist(document, 'DOMContentLoaded', this.getCardList.bind(this));
     }
 
     getCardList(){
-        const userName = _.$('header span').innerText;
-        _.get(`/board/get/cards/${userName}`).then(res => {
-            console.log(res);
+        _.get(`${location.pathname}/data`).then(res => {
+            res.text().then(res => {
+                this.cardList = JSON.parse(res);
+                console.log(this.cardList);
+            })
         })
     }
 }
