@@ -15,7 +15,7 @@ router.use(auth.isAdmin);
 
 router.get('/', function(req, res, next){
     res.render('admin', {
-        title: 'admin', 
+        title: 'ADMIN', 
         link: '/logout',
         linktext: '로그아웃',
         user: req.user.name
