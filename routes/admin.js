@@ -11,7 +11,9 @@ const adminDB = new DatabaseManager({
     database: process.env.DB_DATABASE
 });
 
-router.get('/', auth.isAdmin, function(req, res, next){
+router.use(auth.isAdmin);
+
+router.get('/', function(req, res, next){
     res.render('admin', {
         title: 'admin', 
         link: '/logout',
@@ -20,12 +22,12 @@ router.get('/', auth.isAdmin, function(req, res, next){
     });
 });
 
-router.get('/get/users', auth.isAdmin, async function(req, res, next){
+router.get('/get/users', async function(req, res, next){
     const users = await adminDB.getUserData();
     res.send(users);
 });
 
-router.post('/change/users/auth', auth.isAdmin, async function(req, res, next){
+router.post('/change/users/auth', async function(req, res, next){
     const auth = req.body.authValue;
     const userList = req.body.userlist;
     const result = await adminDB.updateUserAuth(auth, userList.join(','));
@@ -42,7 +44,7 @@ router.post('/change/users/auth', auth.isAdmin, async function(req, res, next){
     res.send(users);
 });
 
-router.post('/delete/user', auth.isAdmin, async function(req, res, next){
+router.post('/delete/user', async function(req, res, next){
     const user = req.body.userId;
     const result = await adminDB.deleteUser(user);
 
