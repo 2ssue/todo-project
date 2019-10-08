@@ -18,6 +18,7 @@ main{
     padding: $default-size;
     width: -webkit-fill-available;
     max-width: 20rem;
+    min-width: 8rem;
     border-radius: 10px;
     border: 1px solid lightgrey;
     h3{
@@ -58,12 +59,14 @@ main{
 
 .cards{
     margin-top: $default-size;
+    height: 100%;
 }
 
 .card{
     background-color: white;
     margin-top: calc(#{$default-size} / 2);
     min-height: calc(#{$default-size} * 2);
+    min-width: 6rem;
     padding: calc(#{$default-size} * 0.8);
     border-radius: 5px;
     box-shadow: 0 0 3px 1px lightgray;
@@ -78,4 +81,9 @@ span{
 
 .button{
     color: gray;          
+}
+
+.while-drag{
+    cursor: -webkit-grab;
+    opacity: 0.5;
 }
