@@ -29,8 +29,9 @@ router.post('/', async function(req, res, next){
     });
 
     const result = await userDB.insertUser(body.userid, body.password, body.name);   
+    
     if(result.affectedRows){
-        const result = await boardDB.addBoard(body.userid);
+        const result = await boardDB.initBoardData(body.userid);
         if(result.affectedRows){
             res.send(JSON.stringify({
                 result: 'success'

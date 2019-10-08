@@ -65,6 +65,27 @@ class boardTable extends DatabaseManager{
         const query = `INSERT INTO BOARD_LIST (board_id) VALUES (?)`;
         const result = await this.query(query, boardId);
 
+        return result;;
+    }
+
+    async addColumnTable(boardId){
+        const query = 
+        `INSERT INTO COLUMNS (column_id, board_id, name) VALUES 
+        ('${boardId}0', '${boardId}', 'TODO'), 
+        ('${boardId}1', '${boardId}', 'DOING'), 
+        ('${boardId}2', '${boardId}', 'DONE')`
+        const result = await this.query(query);
+
+        return result;
+    }
+
+    async initBoardData(boardId){
+        let result = await this.addBoard(boardId);
+        
+        if(result.affectedRows){
+           result = await this.addColumnTable(boardId); 
+        }
+
         return result;
     }
 }
