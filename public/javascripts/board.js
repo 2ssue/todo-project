@@ -33,7 +33,22 @@ class Board{
             res.text().then(res => {
                 this.cards = JSON.parse(res);
                 console.log(this.cards);
+                this.renderCardList();
             })
+        })
+    }
+
+    renderCardList(){
+        let cardsHTML = [];
+        this.cards.forEach(element => {
+            const columnIndex = Number(element.column_id.split('').pop());
+            if(!cardsHTML[columnIndex])
+                cardsHTML[columnIndex] = [];
+            cardsHTML[columnIndex].push(views.cardHTML(element['card_id'], element.content)); 
+        });
+
+        _.$$('.cards').forEach((element, index) => {
+            element.innerHTML = cardsHTML[index] ? cardsHTML[index].join('') : '';
         })
     }
 
@@ -75,10 +90,22 @@ class Board{
     addCard(content){
         _.post(`${location.pathname}/add/card`, {content: content}).then(res => {
             res.text().then(res => {
-                this.cardList = JSON.parse(res);
-                console.log(this.cardList);
+                const result = JSON.parse(res);
+                if(result.result === 'success'){
+                    this.getCardList();
+                    alert('추가가 완료되었습니다');
+                    this.removeAddCardInterface();
+                }else{
+                    alert('추가 실패. 다시 시도해주세요');
+                }
             })
         })
+    }
+
+    updateCard(){ //Observer, 카드가 변경될 때 업데이트 신호 
+        _.post(`/board/update/card/${cardNum}`, cardContent).then(res => {
+            
+        });
     }
 }
 

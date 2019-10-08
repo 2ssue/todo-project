@@ -60,6 +60,18 @@ main{
     margin-top: $default-size;
 }
 
+.card{
+    background-color: white;
+    margin-top: calc(#{$default-size} / 2);
+    min-height: calc(#{$default-size} * 2);
+    padding: calc(#{$default-size} * 0.8);
+    border-radius: 5px;
+    box-shadow: 0 0 3px 1px lightgray;
+    p{
+        font-size: calc(#{$default-size} * 0.8);
+    }
+}
+
 span{
     float: right;
 }
