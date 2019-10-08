@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const DatabaseManager = require('../nodejs/board_table.js');
+const DatabaseManager = require('../db_models/board_table.js');
 const auth = require('../middleware/auth.js');
 require('dotenv').config();
 

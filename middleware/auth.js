@@ -1,6 +1,6 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const DatabaseManager = require('./user_table.js');
+const DatabaseManager = require('../db_models/user_table.js');
 require('dotenv').config();
 
 const setPassport = () => {
