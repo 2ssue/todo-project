@@ -12,6 +12,13 @@ class boardTable extends DatabaseManager{
         return result;
     }
 
+    async getColumns(boardId){
+        const query = `SELECT column_id, name FROM COLUMNS WHERE board_id=?`;
+        const result = await this.query(query, boardId);
+
+        return result;
+    }
+
     async checkBoardAuth(boardId, userId){
         const query = `SELECT l.access_state, a.userid, a.access_auth FROM BOARD_LIST l LEFT JOIN BOARD_AUTH a ON l.board_id=a.board_id WHERE l.board_id=? AND a.userid=?`
         const results = await this.query(query, boardId, userId);

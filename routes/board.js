@@ -13,15 +13,30 @@ const boardDB = new DatabaseManager({
 
 router.use(auth.isLogined);
 
-router.get('/:boardId/data', async function(req, res, next){
+router.get('/:boardId/columns', async function(req, res, next){
     const boardId = req.url.split('/')[1];
-    
+
     if(req.user['board_auth'].split('/')[0] === boardId){
-        const cards = await boardDB.getUserCards(boardId);
-        res.send(cards);
+        const columns = await boardDB.getColumns(boardId);
+        res.send(columns);
     }else{
         const result = await boardDB.checkBoardAuth(boardId, req.user.userid);
         if(result){
+            const columns = await boardDB.getColumns(boardId);
+            res.send(columns);
+        }else{
+            next({
+                message: `😰함께 볼 수 없는 보드입니다`,
+                status: 401
+            });
+        }
+    }
+})
+
+router.get('/:boardId/cards', async function(req, res, next){
+    const boardId = req.url.split('/')[1];
+    
+    if(req.user['board_auth'].split('/')[0] === boardId){
             const cards = await boardDB.getUserCards(boardId);
             res.send(cards);
         }else{
