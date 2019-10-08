@@ -49,17 +49,17 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `todo_db`.`COLUMN`
+-- Table `todo_db`.`COLUMNS`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `todo_db`.`COLUMN` ;
+DROP TABLE IF EXISTS `todo_db`.`COLUMNS` ;
 
-CREATE TABLE IF NOT EXISTS `todo_db`.`COLUMN` (
+CREATE TABLE IF NOT EXISTS `todo_db`.`COLUMNS` (
   `column_id` VARCHAR(21) NOT NULL,
   `board_id` VARCHAR(20) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
-  INDEX `fk_COLUMN_BOARD_LIST1_idx` (`board_id` ASC),
+  INDEX `fk_COLUMNS_BOARD_LIST1_idx` (`board_id` ASC),
   PRIMARY KEY (`column_id`),
-  CONSTRAINT `fk_COLUMN_BOARD_LIST1`
+  CONSTRAINT `fk_COLUMNS_BOARD_LIST1`
     FOREIGN KEY (`board_id`)
     REFERENCES `todo_db`.`BOARD_LIST` (`board_id`)
     ON DELETE CASCADE
@@ -81,15 +81,15 @@ CREATE TABLE IF NOT EXISTS `todo_db`.`BOARD` (
   `prev_card_id` INT NULL,
   PRIMARY KEY (`card_id`),
   INDEX `fk_BOARD_BOARD_LIST1_idx` (`board_id` ASC),
-  INDEX `fk_BOARD_COLUMN1_idx` (`column_id` ASC),
+  INDEX `fk_BOARD_COLUMNS1_idx` (`column_id` ASC),
   CONSTRAINT `fk_BOARD_BOARD_LIST1`
     FOREIGN KEY (`board_id`)
     REFERENCES `todo_db`.`BOARD_LIST` (`board_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `fk_BOARD_COLUMN1`
+  CONSTRAINT `fk_BOARD_COLUMNS1`
     FOREIGN KEY (`column_id`)
-    REFERENCES `todo_db`.`COLUMN` (`column_id`)
+    REFERENCES `todo_db`.`COLUMNS` (`column_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
