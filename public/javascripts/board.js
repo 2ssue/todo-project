@@ -39,8 +39,8 @@ class Board{
                 this.columns = JSON.parse(res);
                 const boardSection = _.$('#board');
                 
-                this.columns.forEach((element) => {
-                    boardSection.innerHTML += views.columnHTML(element.name);
+                this.columns.forEach((element, index) => {
+                    boardSection.innerHTML += views.columnHTML(element.name, index);
                 });
             });
         });
