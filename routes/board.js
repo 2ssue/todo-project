@@ -37,14 +37,13 @@ router.get('/:boardId/cards', async function(req, res, next){
     const boardId = req.url.split('/')[1];
     
     if(req.user['board_auth'].split('/')[0] === boardId){
-            const cards = await boardDB.getUserCards(boardId);
-            res.send(cards);
-        }else{
-            next({
-                message: `😰함께 볼 수 없는 보드입니다`,
-                status: 401
-            });
-        }
+        const cards = await boardDB.getUserCards(boardId);
+        res.send(cards);
+    }else{
+        next({
+            message: `😰함께 볼 수 없는 보드입니다`,
+            status: 401
+        });
     }
 });
 

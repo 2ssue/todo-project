@@ -9,3 +9,14 @@ export function columnHTML(name){
     
     return renderHTML;
 }
+
+export function addCardHTML(){
+    const renderHTML =  
+    `<div class='add-card'>
+        <textarea></textarea>
+        <button id='add-button' disabled>Add</button>
+        <button id='cancel-button'>Cancel</button>
+    </div>`;
+    
+    return renderHTML;
+}

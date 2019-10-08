@@ -4,24 +4,66 @@ main{
     margin: $default-size;
 }
 
-section{
+.board{
     border-radius: 5px;
     display: flex;
     flex-flow: wrap;
     min-height: 80vh;
     margin-top: $default-size;
+}
 
-    .column{
-        background-color: whitesmoke;
-        margin: $default-size $default-size 0 0;
-        padding: $default-size;
-        width: -webkit-fill-available;
-        max-width: 20rem;
-        border-radius: 10px;
-        border: 1px solid lightgrey;
+.column{
+    background-color: whitesmoke;
+    margin: $default-size $default-size 0 0;
+    padding: $default-size;
+    width: -webkit-fill-available;
+    max-width: 20rem;
+    border-radius: 10px;
+    border: 1px solid lightgrey;
+    h3{
+        display: inline;
     }
+    .button{
+        margin-left: 0.5rem;
+    }
+    .button:hover{
+        color: black;
+        cursor: pointer;
+    }
+}
+
+.add-card{
+    margin: $default-size 0;
+    textarea{
+        resize: none;
+        border-radius: 5px;
+        width: -webkit-fill-available;
+        height: calc(#{$default-size} * 3.5);
+        margin-bottom: calc(#{$default-size} / 2);
+        padding: calc(#{$default-size} / 2);
+        font-family: inherit;
+    }
+    button{
+        width: 48%;
+        height: calc(#{$default-size} * 2);
+    }
+    .add-button{
+        background-color: #67c591;
+        border: none;
+    }
+    button:last-child{
+        float: right;
+    }
+}
+
+.cards{
+    margin-top: $default-size;
 }
 
 span{
     float: right;
+}
+
+.button{
+    color: gray;          
 }
