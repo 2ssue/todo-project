@@ -13,6 +13,37 @@ class Board{
         _.regist(_.$('#board'), 'keyup', this.activateButton);
         _.regist(document, 'DOMContentLoaded', this.getColumnList.bind(this));
         _.regist(document, 'DOMContentLoaded', this.getCardList.bind(this));
+        _.regist(_.$('#board'), 'dragstart', this.setDragElement.bind(this));
+        _.regist(_.$('#board'), 'dragend', this.dropElement);
+        _.regist(_.$('#board'), 'dragenter', this.checkDropPosition.bind(this));
+    }
+
+    checkDropPosition(e){
+        if(e.target.className === 'cards'){
+            const adjacentElement = document.elementFromPoint(e.clientX, e.clientY-8);
+            if(adjacentElement.className === 'cards'){
+                e.target.insertAdjacentElement('beforeend', this.dragged);
+                return;
+            }
+        }
+        
+        if(e.target.className === 'card'){
+            if(e.target.previousElementSibling){
+                e.target.insertAdjacentElement('afterend', this.dragged);
+            }else{
+                e.target.insertAdjacentElement('beforebegin', this.dragged);
+            }
+        }
+    }
+
+    setDragElement(e){
+        this.dragged = e.target;
+        e.target.classList.add('while-drag');
+        e.dataTransfer.dropEffect = 'move';
+    }
+
+    dropElement(e){
+        e.target.classList.remove('while-drag');
     }
 
     boardEventController(e){

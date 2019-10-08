@@ -23,7 +23,7 @@ export function addCardHTML(){
 
 export function cardHTML(id, content){
     const renderHTML = 
-    `<div class='card' id='card-${id}'>
+    `<div class='card' id='card-${id}' draggable='true'>
         <span id='close-card-button' class='button'>&#215;</span>
         <p>📄 ${content}</p>
     </div>`;
