@@ -63,14 +63,18 @@ const isLogined = (req, res, next) => {
 }
 
 const canUpdate = (req, res, next) => {
-    if(req.user && req.user['board_auth'] === 'w'){
-        next();
-    }else{
-        next({
-            message: '😅접근 권한이 없습니다',
-            status: 401
-        });
+    const board_auth = req.user['board_auth'].split('/');
+    if(req.url.split('/')[1] === board_auth[0]){
+        if(board_auth[1] === 'w'){
+            next();
+
+            return true;
+        }
     }
+    next({
+        message: '😅접근 권한이 없습니다',
+        status: 401
+    });
 }
 
 module.exports = {
