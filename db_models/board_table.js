@@ -6,7 +6,7 @@ class boardTable extends DatabaseManager{
     }
 
     async getUserCards(boardId){
-        const query = `SELECT card_id, column_id, content, prev_card, file_src FROM BOARD WHERE board_id=?`
+        const query = `SELECT card_id, column_id, content, prev_card_id, file_src FROM BOARD WHERE board_id=?`;
         const result = await this.query(query, boardId);
 
         return result;
