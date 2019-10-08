@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const UserDatabaseManager = require('../nodejs/user_table.js');
-const BoardDatabaseManager = require('../nodejs/board_table.js');
-const auth = require('../nodejs/auth.js')
+const UserDatabaseManager = require('../db_models/user_table.js');
+const BoardDatabaseManager = require('../db_models/board_table.js');
 require('dotenv').config();
 
 const userDB = new UserDatabaseManager({

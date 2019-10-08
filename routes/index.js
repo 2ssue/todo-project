@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const session = require('express-session');
-const auth = require('../nodejs/auth.js');
+const auth = require('../middleware/auth.js');
 const passport = require('passport');
 require('dotenv').config();
 
