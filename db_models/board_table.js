@@ -1,8 +1,5 @@
 const DatabaseManager = require('./db.js');
 
-const PUBLIC_ACCESS_AUTH = 0;
-const PRIVATE_ACCESS_AUTH = 1;
-
 class boardTable extends DatabaseManager{
     constructor(dbpool){
         super(dbpool);
