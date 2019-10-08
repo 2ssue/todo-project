@@ -45,7 +45,7 @@ class boardTable extends DatabaseManager{
     }
 
     async addCard(boardId, content, file_src, prev_card){
-        const query = `INSERT INTO BOARD (board_id, state, content, file_src, prev_card_id) VALUES(?,'todo',?,?,?)`;
+        const query = `INSERT INTO BOARD (board_id, column_id, content, file_src) VALUES(?,'${boardId}0',?,?)`;
         const result = await this.query(query, boardId, content, file_src, prev_card);
 
         return result;
