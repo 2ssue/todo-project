@@ -134,7 +134,7 @@ router.post('/:boardId/add/card', auth.canUpdate, async function(req, res, next)
     const parseUrl = req.url.split('/');
     const boardId = parseUrl[1];
     const body = req.body;
-    const result = await boardDB.addCard(boardId, body.content, body['file_src'], body['prev_card']);
+    const result = await boardDB.addCard(boardId, body.content, body['file_src']='');
 
     if(result.affectedRows){
         boardDB.addLog(boardId, body.content, req.user.userid, 'add', '', 'todo');
