@@ -9,10 +9,28 @@ class Board{
     }
 
     registEvent(){
-        _.regist(_.$('#board'), 'click', this.columnEventHandler.bind(this));
+        _.regist(_.$('#board'), 'click', this.boardEventController.bind(this));
         _.regist(_.$('#board'), 'keyup', this.activateButton);
         _.regist(document, 'DOMContentLoaded', this.getColumnList.bind(this));
         _.regist(document, 'DOMContentLoaded', this.getCardList.bind(this));
+    }
+
+    boardEventController(e){
+        switch(e.target.id){
+            case 'add-card-button':
+                this.removeAddCardInterface();
+
+                const parent = e.target.parentNode;
+                _.$('.cards', parent).insertAdjacentHTML('afterbegin', views.addCardHTML());
+
+                break;
+            case 'add-button':
+                this.addCard(e.target.previousElementSibling.value);
+                break;
+            case 'cancel-button':
+                this.removeAddCardInterface();
+                break;
+        }
     }
 
     getColumnList(){
@@ -67,24 +85,6 @@ class Board{
 
         if(addCardInterface)
             addCardInterface.remove();
-    }
-
-    columnEventHandler(e){
-        switch(e.target.id){
-            case 'add-card-button':
-                this.removeAddCardInterface();
-
-                const parent = e.target.parentNode;
-                _.$('.cards', parent).insertAdjacentHTML('afterbegin', views.addCardHTML());
-
-                break;
-            case 'add-button':
-                this.addCard(e.target.previousElementSibling.value);
-                break;
-            case 'cancel-button':
-                this.removeAddCardInterface();
-                break;
-        }
     }
 
     addCard(content){
