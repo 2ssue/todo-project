@@ -13,7 +13,7 @@ export function columnHTML(name, index){
 export function addCardHTML(){
     const renderHTML =  
     `<div class='add-card'>
-        <textarea></textarea>
+        <textarea maxlength='500' placeholder='Enter a note'></textarea>
         <button id='add-button' disabled>Add</button>
         <button id='cancel-button'>Cancel</button>
     </div>`;
