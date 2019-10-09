@@ -18,6 +18,24 @@ class Board{
         _.regist(_.$('#board'), 'dragenter', this.checkDropPosition.bind(this));
     }
 
+    boardEventController(e){
+        switch(e.target.id){
+            case 'add-card-button':
+                this.removeAddCardInterface();
+
+                const parent = e.target.parentNode;
+                _.$('.cards', parent).insertAdjacentHTML('afterbegin', views.addCardHTML());
+
+                break;
+            case 'add-button':
+                this.addCard(e.target.previousElementSibling.value);
+                break;
+            case 'cancel-button':
+                this.removeAddCardInterface();
+                break;
+        }
+    }
+
     checkDropPosition(e){
         if(e.target.className === 'cards'){
             const adjacentElement = document.elementFromPoint(e.clientX, e.clientY-8);
@@ -44,24 +62,6 @@ class Board{
 
     dropElement(e){
         e.target.classList.remove('while-drag');
-    }
-
-    boardEventController(e){
-        switch(e.target.id){
-            case 'add-card-button':
-                this.removeAddCardInterface();
-
-                const parent = e.target.parentNode;
-                _.$('.cards', parent).insertAdjacentHTML('afterbegin', views.addCardHTML());
-
-                break;
-            case 'add-button':
-                this.addCard(e.target.previousElementSibling.value);
-                break;
-            case 'cancel-button':
-                this.removeAddCardInterface();
-                break;
-        }
     }
 
     getColumnList(){
