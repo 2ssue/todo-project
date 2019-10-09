@@ -66,8 +66,8 @@ class Board{
 
     getColumnList(){
         _.get(`${location.pathname}/columns`).then(res => {
-            res.text().then(res => {
-                this.columns = JSON.parse(res);
+            res.json().then(res => {
+                this.columns = res;
                 const boardSection = _.$('#board');
                 
                 this.columns.forEach((element, index) => {
@@ -79,8 +79,8 @@ class Board{
     
     getCardList(){
         _.get(`${location.pathname}/cards`).then(res => {
-            res.text().then(res => {
-                this.cards = JSON.parse(res);
+            res.json().then(res => {
+                this.cards = res;
                 this.renderCardList();
             })
         })
@@ -120,8 +120,8 @@ class Board{
 
     addCard(content){
         _.post(`${location.pathname}/add/card`, {content: content}).then(res => {
-            res.text().then(res => {
-                const result = JSON.parse(res);
+            res.json().then(res => {
+                const result = res;
                 if(result.result === 'success'){
                     this.getCardList();
                     alert('추가가 완료되었습니다');
