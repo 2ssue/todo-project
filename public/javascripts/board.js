@@ -81,7 +81,6 @@ class Board{
         _.get(`${location.pathname}/cards`).then(res => {
             res.text().then(res => {
                 this.cards = JSON.parse(res);
-                console.log(this.cards);
                 this.renderCardList();
             })
         })
