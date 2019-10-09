@@ -1,6 +1,7 @@
 export function columnHTML(name, index){
     const renderHTML = 
     `<section class='column' id='column-${index}'>
+        <span class='card-count'></span>
         <h3>${name}</h3>
         <span class='button'>&#215;</span>
         <span class='button' id='add-card-button'>&#43;</span>

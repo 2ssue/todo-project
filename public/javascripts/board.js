@@ -97,6 +97,7 @@ class Board{
 
         _.$$('.cards').forEach((element, index) => {
             element.innerHTML = cardsHTML[index] ? cardsHTML[index].join('') : '';
+            element.parentElement.firstElementChild.innerHTML = cardsHTML[index] ? cardsHTML[index].length : 0;
         })
     }
 

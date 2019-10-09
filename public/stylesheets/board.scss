@@ -33,6 +33,19 @@ main{
     }
 }
 
+.card-count{
+    float: none;
+    display: inline-block;
+    width: 25px;
+    height: 20px;
+    padding-top: 5px;
+    text-align: center;
+    background-color: gray;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: white;
+}
+
 .add-card{
     margin: $default-size 0;
     textarea{
