@@ -24,8 +24,7 @@ class Board{
         
         switch(e.target.id){
             case 'add-card-button':
-                const parent = e.target.parentNode;
-                _.$('.cards', parent).insertAdjacentHTML('afterbegin', views.addCardHTML());
+                _.$('.cards', e.target.parentNode).insertAdjacentHTML('afterbegin', views.addCardHTML());
                 break;
             case 'add-button':
                 this.addCard(e.target.previousElementSibling.value);
