@@ -19,13 +19,13 @@ class Board{
     }
 
     boardEventController(e){
+        if(e.target.id === '') return;
+        this.removeAddCardInterface();
+        
         switch(e.target.id){
             case 'add-card-button':
-                this.removeAddCardInterface();
-
                 const parent = e.target.parentNode;
                 _.$('.cards', parent).insertAdjacentHTML('afterbegin', views.addCardHTML());
-
                 break;
             case 'add-button':
                 this.addCard(e.target.previousElementSibling.value);
