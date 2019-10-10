@@ -1,7 +1,7 @@
 import * as _ from './util/utils.js';
-import * as views from './view/views.js';
-import Card from './card.js';
-import Column from './column.js';
+import Card from './model/card.js';
+import Column from './model/column.js';
+import * as modal from './model/modal.js';
 
 class Board{
     constructor(){

@@ -1,6 +1,6 @@
-import * as views from './view/views.js';
-import * as _ from './util/utils.js';
-import Observable from './util/observable.js';
+import * as views from '../view/views.js';
+import * as _ from '../util/utils.js';
+import Observable from '../util/observable.js';
 
 export default class Column extends Observable{
     constructor(columns){
