@@ -121,10 +121,10 @@ class Board{
     activateButton(e){
         if(e.target.value){
             e.target.nextElementSibling.disabled = false;
-            e.target.nextElementSibling.classList.add('add-button');
+            e.target.nextElementSibling.classList.add('positive-button');
         }else{
             e.target.nextElementSibling.disabled = true;
-            e.target.nextElementSibling.classList.remove('add-button');
+            e.target.nextElementSibling.classList.remove('positive-button');
         }
     }
 
