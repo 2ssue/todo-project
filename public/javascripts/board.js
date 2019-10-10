@@ -141,7 +141,8 @@ class Board{
                 }else{
                     this.cardModel = new Card(res);
                 }
-                _.$('.logs').insertAdjacentHTML('beforebegin', `<p id='newlog-button'>View new activity</p>`);
+                if(!_.$('#newlog-button'))
+                    _.$('.logs').insertAdjacentHTML('beforebegin', `<p id='newlog-button'>View new activity</p>`);
             });
         })
     }
