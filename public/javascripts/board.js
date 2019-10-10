@@ -64,14 +64,7 @@ class Board{
 
     getColumnList(){
         _.get(`${location.pathname}/columns`).then(res => {
-            res.json().then(res => {
-                this.columns = res;
-                const boardSection = _.$('#board');
-                
-                this.columns.forEach((element, index) => {
-                    boardSection.innerHTML += views.columnHTML(element.name, index);
-                });
-            });
+            res.json().then(res => this.columnModel = new Column(res));
         });
     }
     
