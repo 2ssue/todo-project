@@ -85,6 +85,11 @@ main{
     box-shadow: 0 0 3px 1px lightgray;
     p{
         font-size: calc(#{$default-size} * 0.8);
+        display: flex;
+        span{
+            font-size: inherit;
+            margin-right: calc(#{$default-size} * 0.3);
+        }
     }
 }
 
