@@ -27,7 +27,7 @@ class Board{
                 this.cardModel.showAddCardInterface(e.target.parentNode);
                 break;
             case 'add-button':
-                this.addCard(e.target.previousElementSibling.value);
+                this.addCard(e.target, column);
                 break;
             case 'cancel-button':
                 this.cardModel.unshowAddCardInterface();
@@ -93,19 +93,16 @@ class Board{
         }
     }
 
-    removeAddCardInterface(){
-        const addCardInterface = _.$('.add-card');
+    addCard(element, column){
+        const content = element.previousElementSibling.value;
+        const columnName = _.$('h3', column).innerHTML;
+        const columnIndex = column.id.split('-').pop();
 
-        if(addCardInterface)
-            addCardInterface.remove();
-    }
-
-    addCard(content){
-        _.post(`${location.pathname}/add/card`, {content: content}).then(res => {
+        _.post(`${location.pathname}/add/card`, {content, columnIndex, columnName}).then(res => {
             res.json().then(res => {
                 const result = res;
                 if(result.result === 'success'){
-                    this.getCardList();
+                    this.getCardList('add');
                     alert('추가가 완료되었습니다');
                 }else{
                     alert('추가 실패. 다시 시도해주세요');
