@@ -46,6 +46,19 @@ class Board{
         }
     }
 
+    boardDoubleClickEventController(e){
+        switch(e.target.className){
+            case 'column-title':
+                break;
+            case 'card':
+                modal.showEditCardModal(_.$(`#content`, e.target).innerHTML);
+                _.regist(_.$('.modal'), 'keyup', this.activateButton);
+                _.regist(_.$('.modal'), 'click', this.modalEventController.bind(this));
+                this.selected = e.target;
+                break;
+        }
+    }
+
     modalEventController(e){
         if(e.target.localName !== 'textarea' && e.target.className !== 'positive-button'){
             modal.removeModal();
@@ -77,19 +90,6 @@ class Board{
                 }
             })
         });
-    }
-
-    boardDoubleClickEventController(e){
-        switch(e.target.className){
-            case 'column-title':
-                break;
-            case 'card':
-                modal.showEditCardModal(_.$(`#content`, e.target).innerHTML);
-                _.regist(_.$('.modal'), 'keyup', this.activateButton);
-                _.regist(_.$('.modal'), 'click', this.modalEventController.bind(this));
-                this.selected = e.target;
-                break;
-        }
     }
 
     checkDropPosition(e){
