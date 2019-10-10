@@ -1,5 +1,7 @@
 import * as _ from './util/utils.js';
 import * as views from './view/views.js';
+import Card from './card.js';
+import Column from './column.js';
 
 
 class Board{
@@ -23,13 +25,13 @@ class Board{
         
         switch(e.target.id){
             case 'add-card-button':
-                _.$('.cards', e.target.parentNode).insertAdjacentHTML('afterbegin', views.addCardHTML());
+                this.cardModel.showAddCardInterface(e.target.parentNode);
                 break;
             case 'add-button':
                 this.addCard(e.target.previousElementSibling.value);
                 break;
             case 'cancel-button':
-                this.removeAddCardInterface();
+                this.cardModel.unshowAddCardInterface();
                 break;
         }
     }
@@ -68,27 +70,15 @@ class Board{
         });
     }
     
-    getCardList(){
+    getCardList(reRenderCardflag){
         _.get(`${location.pathname}/cards`).then(res => {
             res.json().then(res => {
-                this.cards = res;
-                this.renderCardList();
-            })
-        })
-    }
-
-    renderCardList(){
-        let cardsHTML = [];
-        this.cards.forEach(element => {
-            const columnIndex = Number(element.column_id.split('').pop());
-            if(!cardsHTML[columnIndex])
-                cardsHTML[columnIndex] = [];
-            cardsHTML[columnIndex].push(views.cardHTML(element['card_id'], element.content)); 
-        });
-
-        _.$$('.cards').forEach((element, index) => {
-            element.innerHTML = cardsHTML[index] ? cardsHTML[index].join('') : '';
-            element.parentElement.firstElementChild.innerHTML = cardsHTML[index] ? cardsHTML[index].length : 0;
+                if(this.cardModel){
+                    this.cardModel.updateCardData(res, reRenderCardflag);
+                }else{
+                    this.cardModel = new Card(res);
+                }
+            });
         })
     }
 
@@ -116,7 +106,6 @@ class Board{
                 if(result.result === 'success'){
                     this.getCardList();
                     alert('추가가 완료되었습니다');
-                    this.removeAddCardInterface();
                 }else{
                     alert('추가 실패. 다시 시도해주세요');
                 }
