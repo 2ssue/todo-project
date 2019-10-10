@@ -1,4 +1,5 @@
 import * as _ from './util/utils.js';
+import * as views from './view/views.js'
 import Card from './model/card.js';
 import Column from './model/column.js';
 import * as modal from './model/modal.js';
@@ -9,7 +10,9 @@ class Board{
     }
 
     registEvent(){
+        _.regist(_.$('#menu'), 'click', this.showBoardLog);
         _.regist(_.$('#board'), 'click', this.boardClickEventController.bind(this));
+        _.regist(_.$('#board'), 'dblclick', this.boardDoubleClickEventController.bind(this));
         _.regist(_.$('#board'), 'keyup', this.activateButton);
         _.regist(document, 'DOMContentLoaded', this.getColumnList.bind(this));
         _.regist(document, 'DOMContentLoaded', this.getCardList.bind(this));
@@ -44,7 +47,7 @@ class Board{
     }
 
     modalEventController(e){
-        if(e.target.className !== 'positive-button'){
+        if(e.target.localName !== 'textarea' && e.target.className !== 'positive-button'){
             modal.removeModal();
             return;
         }
@@ -52,6 +55,9 @@ class Board{
         switch(e.target.id){
             case 'delete-card':
                 this.deleteCard();
+                break;
+            case 'edit-card':
+                this.updateCardContent(e.target);
                 break;
         }
     }
@@ -71,6 +77,19 @@ class Board{
                 }
             })
         });
+    }
+
+    boardDoubleClickEventController(e){
+        switch(e.target.className){
+            case 'column-title':
+                break;
+            case 'card':
+                modal.showEditCardModal(_.$(`#content`, e.target).innerHTML);
+                _.regist(_.$('.modal'), 'keyup', this.activateButton);
+                _.regist(_.$('.modal'), 'click', this.modalEventController.bind(this));
+                this.selected = e.target;
+                break;
+        }
     }
 
     checkDropPosition(e){
@@ -163,6 +182,17 @@ class Board{
         _.post(`${location.pathname}/update/card/state/${cardNum}`, cardInformation).then(res => {
             res.json().then(this.getCardList())
         });
+    }
+
+    updateCardContent(target){
+        const cardNum = this.selected.id.split('-').pop();
+
+        _.post(`${location.pathname}/update/card/${cardNum}`, {content: _.$('textarea', target.parentNode).value}).then(res => {
+            res.json().then(() => {
+                this.getCardList('update');
+                modal.removeModal();
+            });
+        })
     }
 
     showBoardLog(e){
