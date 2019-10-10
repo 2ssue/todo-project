@@ -61,10 +61,6 @@ main{
         width: 48%;
         height: calc(#{$default-size} * 2);
     }
-    .add-button{
-        background-color: #67c591;
-        border: none;
-    }
     button:last-child{
         float: right;
     }
