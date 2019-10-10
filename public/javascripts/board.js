@@ -32,7 +32,42 @@ class Board{
             case 'cancel-button':
                 this.cardModel.unshowAddCardInterface();
                 break;
+            case 'delete-card-button':
+                modal.showDeleteCardModal();
+                _.regist(_.$('.modal'), 'click', this.modalEventController.bind(this));
+                this.selected = e.target.parentNode;
+                break;
         }
+    }
+
+    modalEventController(e){
+        if(e.target.className !== 'positive-button'){
+            modal.removeModal();
+            return;
+        }
+
+        switch(e.target.id){
+            case 'delete-card':
+                this.deleteCard();
+                break;
+        }
+    }
+
+    deleteCard(){
+        const cardId = this.selected.id.split('-').pop();
+
+        _.post(`${location.pathname}/delete/card/${cardId}`, {
+            content: _.$(`#content`, this.selected).innerHTML
+        }).then(res => {
+            res.json().then(res => {
+                if(res.result === 'success'){
+                    this.getCardList('delete');
+                    modal.removeModal();
+                }else{
+                    alert('삭제에 실패했습니다. 다시 시도해주세요');
+                }
+            })
+        });
     }
 
     checkDropPosition(e){

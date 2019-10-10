@@ -31,3 +31,14 @@ export function cardHTML(id, content){
 
     return renderHTML;
 }
+
+export const deleteCardModalHTML = 
+`<div class='modal'>
+    <div class='modal-content'>
+        <p>선택한 카드를 삭제하시겠습니까?</p>
+        <div class='show-right'>
+            <button class='positive-button' id='delete-card'>Delete</button>
+            <button>Cancel</button>
+        </div>
+    </div>
+</div>`;
