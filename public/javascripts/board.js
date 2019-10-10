@@ -8,7 +8,7 @@ class Board{
     }
 
     registEvent(){
-        _.regist(_.$('#board'), 'click', this.boardEventController.bind(this));
+        _.regist(_.$('#board'), 'click', this.boardClickEventController.bind(this));
         _.regist(_.$('#board'), 'keyup', this.activateButton);
         _.regist(document, 'DOMContentLoaded', this.getColumnList.bind(this));
         _.regist(document, 'DOMContentLoaded', this.getCardList.bind(this));
@@ -17,7 +17,7 @@ class Board{
         _.regist(_.$('#board'), 'dragenter', this.checkDropPosition.bind(this));
     }
 
-    boardEventController(e){
+    boardClickEventController(e){
         if(e.target.id === '') return;
         this.removeAddCardInterface();
         
