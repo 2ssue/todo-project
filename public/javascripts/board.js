@@ -1,7 +1,6 @@
-import Util from './utils.js'
+import * as _ from './utils.js'
 import * as views from './view/views.js';
 
-const _ = new Util();
 
 class Board{
     constructor(){
