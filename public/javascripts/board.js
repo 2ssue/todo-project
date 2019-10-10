@@ -158,8 +158,7 @@ class Board{
 
         _.post(`${location.pathname}/add/card`, {content, columnIndex, columnName}).then(res => {
             res.json().then(res => {
-                const result = res;
-                if(result.result === 'success'){
+                if(res.result === 'success'){
                     this.getCardList('add');
                 }else{
                     alert('추가 실패. 다시 시도해주세요');
