@@ -45,3 +45,16 @@ export const deleteCardModalHTML =
         </div>
     </div>
 </div>`;
+
+export function log(data){
+    const renderHTML = 
+    `<p>
+        <strong>@${data.userid}</strong>
+        ${data.action} 
+        <strong>${data.card}</strong>
+        ${data.prev ? `from ${data.prev}` : ''}
+        ${data.at ? `to <strong>${data.at}</strong>`: ''}
+    </p>`
+
+    return renderHTML;
+}

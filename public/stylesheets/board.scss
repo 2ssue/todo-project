@@ -113,6 +113,48 @@ main{
     }
 }
 
+.menu{
+    transition: all .7s ease-in-out;
+    position: absolute;
+    background-color: white;
+    max-width: 20rem;
+    max-height: 83vh;
+    padding: $default-size;
+    right: -22rem;
+    visibility: hidden;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    overflow: auto;
+    > p{
+        cursor: pointer;
+        background-color: floralwhite;
+        padding-left: .5rem;
+    }
+    h3{
+        margin-bottom: $default-size;
+        text-decoration: underline;
+    }
+    p{
+        margin: 1.5rem 1rem;
+        font-size: 0.8rem;
+        line-height: 1.3rem;
+        border-bottom: 1px dotted lightgray;
+        *{
+            font-size: 0.9rem;
+            color: darkblue;
+        }
+    }
+}
+
+.logs{
+    margin-top: 3rem;
+}
+
+.show{
+    transform: translateX(-22rem);
+    visibility: visible;
+}
+
 .positive-button{
     background-color: #67c591;
     border: none;

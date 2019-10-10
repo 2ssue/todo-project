@@ -37,6 +37,9 @@ class Board{
                 _.regist(_.$('.modal'), 'click', this.modalEventController.bind(this));
                 this.selected = e.target.parentNode;
                 break;
+            case 'newlog-button':
+                this.showBoardLog(e);
+                break;
         }
     }
 
@@ -114,6 +117,7 @@ class Board{
                 }else{
                     this.cardModel = new Card(res);
                 }
+                _.$('.logs').insertAdjacentHTML('beforebegin', `<p id='newlog-button'>View new activity</p>`);
             });
         })
     }
@@ -157,13 +161,31 @@ class Board{
         const cardNum = card.id.split('-').pop();
 
         _.post(`${location.pathname}/update/card/state/${cardNum}`, cardInformation).then(res => {
-            res.json().then(res => {
-                if(res.result !== 'success'){
-                    alert('동기화 실패. 다시 시도해주세요');    
-                }
-                this.getCardList();
-            })
+            res.json().then(this.getCardList())
         });
+    }
+
+    showBoardLog(e){
+        const menu = _.$('.menu');
+
+        if(e.target.id !== 'newlog-button' && menu.classList.contains('show')){
+            menu.classList.remove('show');
+            return;
+        }
+
+        let button;
+        if(button = _.$('#newlog-button', menu))
+            button.remove();
+
+        menu.classList.add('show');
+        _.get(`${location.pathname}/log`).then(res => {
+            res.json().then(res => {
+                const logContainer = _.$('.logs');
+                res.forEach(element => {
+                    logContainer.insertAdjacentHTML('afterbegin', views.log(element));
+                })
+            })
+        })
     }
 }
 
