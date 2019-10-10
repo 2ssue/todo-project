@@ -3,7 +3,6 @@ import * as views from './view/views.js';
 import Card from './card.js';
 import Column from './column.js';
 
-
 class Board{
     constructor(){
         this.registEvent();
@@ -55,6 +54,7 @@ class Board{
     }
 
     setDragElement(e){
+        this.dragStartColumn = _.$(`#${e.target.parentNode.parentNode.id} h3`).innerHTML;
         this.dragged = e.target;
         e.target.classList.add('while-drag');
         e.dataTransfer.dropEffect = 'move';
@@ -62,6 +62,7 @@ class Board{
 
     dropElement(e){
         e.target.classList.remove('while-drag');
+        this.updateCardState(e.target);
     }
 
     getColumnList(){
@@ -113,9 +114,24 @@ class Board{
         })
     }
 
-    updateCard(){ //Observer, 카드가 변경될 때 업데이트 신호 
-        _.post(`/board/update/card/${cardNum}`, cardContent).then(res => {
-            
+    updateCardState(card){
+        const cardInformation = {
+            content: _.$(`#content`, card).innerHTML,
+            moveColumnIndex: card.parentNode.parentNode.id.split('-').pop(),
+            moveState: _.$(`#${card.parentNode.parentNode.id} h3`).innerHTML,
+            prevCard: card.previousElementSibling ? card.previousElementSibling.id.split('').pop() : 'NULL',
+            prevState: this.dragStartColumn
+        };
+
+        const cardNum = card.id.split('-').pop();
+
+        _.post(`${location.pathname}/update/card/state/${cardNum}`, cardInformation).then(res => {
+            res.json().then(res => {
+                if(res.result !== 'success'){
+                    alert('동기화 실패. 다시 시도해주세요');    
+                }
+                this.getCardList();
+            })
         });
     }
 }
