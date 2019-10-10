@@ -138,7 +138,6 @@ class Board{
                 const result = res;
                 if(result.result === 'success'){
                     this.getCardList('add');
-                    alert('추가가 완료되었습니다');
                 }else{
                     alert('추가 실패. 다시 시도해주세요');
                 }
