@@ -5,6 +5,10 @@ export function showDeleteCardModal(){
     addModalIntoBody(views.deleteCardModalHTML);
 }
 
+export function showEditCardModal(content){
+    addModalIntoBody(views.editCardModalHTML(content));
+}
+
 function addModalIntoBody(htmlElement){
     const body = _.$('body');
 

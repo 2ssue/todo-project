@@ -46,6 +46,16 @@ export const deleteCardModalHTML =
     </div>
 </div>`;
 
+export function editCardModalHTML(content){
+    return `<div class='modal'>
+    <div class='modal-content'>
+        <p>할일 수정</p>
+        <textarea>${content}</textarea>
+        <button class='positive-button' id='edit-card'>Edit Note</button>
+    </div>
+</div>`;
+}    
+
 export function log(data){
     const renderHTML = 
     `<p>
