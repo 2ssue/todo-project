@@ -93,6 +93,39 @@ main{
     }
 }
 
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.4);
+    > div{
+       width: 30%; 
+       margin: 15% auto;
+       background-color: white;
+       padding:  calc(#{$default-size} * 1.5);
+       border-radius: 5px;
+       p{
+           margin-bottom: calc(#{$default-size} * 1.5);
+       }
+       button{
+           padding: 0.3rem 0.7rem;
+           margin-left: calc(#{$default-size} * 0.2);
+       }
+    }
+}
+
+.positive-button{
+    background-color: #67c591;
+    border: none;
+}
+
+.modal-on{
+    overflow: hidden;
+}
+
 span{
     float: right;
 }
