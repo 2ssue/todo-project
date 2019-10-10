@@ -29,5 +29,5 @@ function renderColumnList(columns){
 }
 
 function updateColumnName(index, name){
-    _.$(`.column:nth-child(${index + 1}) h3`).innerHTML = name;
+    _.$(`.column:nth-child(${Number(index) + 2}) h3`).innerHTML = name;
 }

@@ -2,7 +2,7 @@ export function columnHTML(name, index){
     const renderHTML = 
     `<section class='column' id='column-${index}'>
         <span class='card-count'></span>
-        <h3>${name}</h3>
+        <h3 class='column-title'>${name}</h3>
         <span class='button'>&#215;</span>
         <span class='button' id='add-card-button'>&#43;</span>
         <section class='cards'></section>
@@ -52,6 +52,16 @@ export function editCardModalHTML(content){
         <p>할일 수정</p>
         <textarea>${content}</textarea>
         <button class='positive-button' id='edit-card'>Edit Note</button>
+    </div>
+</div>`;
+}    
+
+export function editColumnModalHTML(content){
+    return `<div class='modal'>
+    <div class='modal-content'>
+        <p>컬럼 수정</p>
+        <textarea>${content}</textarea>
+        <button class='positive-button' id='edit-column'>Edit Column</button>
     </div>
 </div>`;
 }    

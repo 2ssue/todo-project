@@ -9,6 +9,10 @@ export function showEditCardModal(content){
     addModalIntoBody(views.editCardModalHTML(content));
 }
 
+export function showEditColumnModal(content){
+    addModalIntoBody(views.editColumnModalHTML(content));
+}
+
 function addModalIntoBody(htmlElement){
     const body = _.$('body');
 

@@ -49,14 +49,16 @@ class Board{
     boardDoubleClickEventController(e){
         switch(e.target.className){
             case 'column-title':
+                modal.showEditColumnModal(e.target.innerHTML);
                 break;
             case 'card':
                 modal.showEditCardModal(_.$(`#content`, e.target).innerHTML);
-                _.regist(_.$('.modal'), 'keyup', this.activateButton);
-                _.regist(_.$('.modal'), 'click', this.modalEventController.bind(this));
-                this.selected = e.target;
                 break;
         }
+
+        this.selected = e.target;
+        _.regist(_.$('.modal'), 'keyup', this.activateButton);
+        _.regist(_.$('.modal'), 'click', this.modalEventController.bind(this));
     }
 
     modalEventController(e){
@@ -71,6 +73,9 @@ class Board{
                 break;
             case 'edit-card':
                 this.updateCardContent(e.target);
+                break;
+            case 'edit-column':
+                this.updateColumnName(e.target);
                 break;
         }
     }
@@ -191,6 +196,20 @@ class Board{
                 this.getCardList('update');
                 modal.removeModal();
             });
+        })
+    }
+
+    updateColumnName(target){
+        const columnIndex = this.selected.parentNode.id.split('-').pop();
+        const name = _.$('textarea', target.parentNode).value;
+        _.post(`${location.pathname}/update/column/${columnIndex}`, {
+            content: this.selected.innerHTML, 
+            name: name
+        }).then(res => {
+            res.json().then(() => {
+                this.columnModel.updateColumn(columnIndex, name);
+                modal.removeModal();
+            })
         })
     }
 
