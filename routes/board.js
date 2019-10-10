@@ -100,7 +100,8 @@ router.post('/:boardId/update/card/state/:cardNum', auth.canUpdate, async functi
     const result = await boardDB.updateCardState(cardNum, `${boardId}${req.body.moveColumnIndex}`, req.body.prevCard);
 
     if(result.changedRows){
-        boardDB.addLog(boardId, req.body.content, req.user.userid, 'moved', req.body.prevState, req.body.moveState);
+        if(req.body.prevState !== req.body.moveState)
+            boardDB.addLog(boardId, req.body.content, req.user.userid, 'moved', req.body.prevState, req.body.moveState);
         res.send(JSON.stringify({
             result: 'success'
         }));
