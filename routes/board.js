@@ -120,7 +120,7 @@ router.post('/:boardId/update/column/:columnIndex', auth.canUpdate, async functi
     const result = await boardDB.updateColumn(req.body.name, `${boardId}${columnIndex}`);
 
     if(result.changedRows){
-        boardDB.addLog(boardId, req.body.content, req.user.userid, 'update', req.body.name, '');
+        boardDB.addLog(boardId, req.body.name, req.user.userid, 'update', req.body.content, '');
         res.send(JSON.stringify({
             result: 'success'
         }));
