@@ -47,18 +47,22 @@ class Board{
     }
 
     boardDoubleClickEventController(e){
+        const registModalEvent = () => {
+            this.selected = e.target;
+            _.regist(_.$('.modal'), 'keyup', this.activateButton);
+            _.regist(_.$('.modal'), 'click', this.modalEventController.bind(this));
+        }
+
         switch(e.target.className){
             case 'column-title':
                 modal.showEditColumnModal(e.target.innerHTML);
+                registModalEvent();
                 break;
             case 'card':
                 modal.showEditCardModal(_.$(`#content`, e.target).innerHTML);
+                registModalEvent();
                 break;
         }
-
-        this.selected = e.target;
-        _.regist(_.$('.modal'), 'keyup', this.activateButton);
-        _.regist(_.$('.modal'), 'click', this.modalEventController.bind(this));
     }
 
     modalEventController(e){
