@@ -25,8 +25,11 @@ export function addCardHTML(){
 export function cardHTML(id, content){
     const renderHTML = 
     `<div class='card' id='card-${id}' draggable='true'>
-        <span id='close-card-button' class='button'>&#215;</span>
-        <p><span>📄</span><span id='content'>${content}</span></p>
+        <span id='delete-card-button' class='button'>&#215;</span>
+        <p>
+            <span>📄</span>
+            <span id='content'>${content}</span>
+        </p>
     </div>`;
 
     return renderHTML;
