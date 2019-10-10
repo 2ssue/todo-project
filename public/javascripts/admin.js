@@ -1,6 +1,5 @@
-import Util from './utils.js'
+import * as _ from './util/utils.js';
 
-const _ = new Util();
 const authElement = 
 `<div class='show-right'>
     <select name='auth' id='select-auth'>

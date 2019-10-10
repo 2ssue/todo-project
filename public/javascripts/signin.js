@@ -1,6 +1,4 @@
-import Util from './utils.js';
-
-const _ = new Util();
+import * as _ from './util/utils.js';
 
 class SignIn{
     constructor(){

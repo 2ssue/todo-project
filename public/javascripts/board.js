@@ -1,4 +1,4 @@
-import * as _ from './utils.js'
+import * as _ from './util/utils.js';
 import * as views from './view/views.js';
 
 
