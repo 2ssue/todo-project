@@ -226,9 +226,8 @@ class Board{
             return;
         }
 
-        let button;
-        if(button = _.$('#newlog-button', menu))
-            button.remove();
+        if(_.$('#newlog-button', menu))
+            _.$('#newlog-button', menu).remove();
 
         menu.classList.add('show');
         _.get(`${location.pathname}/log`).then(res => {
