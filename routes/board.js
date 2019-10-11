@@ -73,7 +73,7 @@ router.get('/:boardId', async function(req, res, next){
     });
 });
 
-router.post('/:boardId/update/card/:cardNum', auth.canUpdate, async function(req, res, next){
+router.post('/:boardId/update/card/:cardNum', auth.canUpdate, async function(req, res){
     const parseUrl = req.url.split('/');
     const cardNum = parseUrl.pop();
     const boardId = parseUrl[1];
@@ -92,7 +92,7 @@ router.post('/:boardId/update/card/:cardNum', auth.canUpdate, async function(req
     }
 });
 
-router.post('/:boardId/update/card/state/:cardNum', auth.canUpdate, async function(req, res, next){
+router.post('/:boardId/update/card/state/:cardNum', auth.canUpdate, async function(req, res){
     const parseUrl = req.url.split('/');
     const cardNum = parseUrl.pop();
     const boardId = parseUrl[1];
@@ -112,7 +112,7 @@ router.post('/:boardId/update/card/state/:cardNum', auth.canUpdate, async functi
     }
 })
 
-router.post('/:boardId/update/column/:columnIndex', auth.canUpdate, async function(req, res, next){
+router.post('/:boardId/update/column/:columnIndex', auth.canUpdate, async function(req, res){
     const parseUrl = req.url.split('/');
     const columnIndex = parseUrl.pop(); 
     const boardId = parseUrl[1];
@@ -131,7 +131,7 @@ router.post('/:boardId/update/column/:columnIndex', auth.canUpdate, async functi
     }
 })
 
-router.post('/:boardId/delete/card/:cardNum', auth.canUpdate, async function(req, res, next){
+router.post('/:boardId/delete/card/:cardNum', auth.canUpdate, async function(req, res){
     const parseUrl = req.url.split('/');
     const cardNum = parseUrl.pop();
     const boardId = parseUrl[1];
@@ -150,7 +150,7 @@ router.post('/:boardId/delete/card/:cardNum', auth.canUpdate, async function(req
     }
 });
 
-router.post('/:boardId/add/card', auth.canUpdate, async function(req, res, next){
+router.post('/:boardId/add/card', auth.canUpdate, async function(req, res){
     const parseUrl = req.url.split('/');
     const boardId = parseUrl[1];
     const body = req.body;
@@ -168,7 +168,7 @@ router.post('/:boardId/add/card', auth.canUpdate, async function(req, res, next)
     }
 });
 
-router.get('/:boardId/log', auth.canUpdate, async function(req, res, next){
+router.get('/:boardId/log', auth.canUpdate, async function(req, res){
     const parseUrl = req.url.split('/');
     const boardId = parseUrl[1];
     const result = await boardDB.query(`SELECT * FROM BOARD_LOG WHERE board_id='${boardId}'`);
