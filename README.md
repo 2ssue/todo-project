@@ -1,6 +1,6 @@
 # Todo List WebPage Project
 
-<a href="/wiki">
+<a href="../../wiki">
 <img alt="project-management" src="https://img.shields.io/badge/api--document-wiki-informational" target=
 "_blank" />
 </a>
