@@ -76,7 +76,7 @@ class boardTable extends DatabaseManager{
         const query = `INSERT INTO BOARD_LIST (board_id) VALUES (?)`;
         const result = await this.query(query, boardId);
 
-        return result;;
+        return result;
     }
 
     async addColumnTable(boardId){
