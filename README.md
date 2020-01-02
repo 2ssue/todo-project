@@ -5,8 +5,6 @@
 "_blank" />
 </a>
 
-## [🏠 PUBLISH PAGE](http://106.10.46.87/board/olsujdng)
-
 ## Install
 ```bash
 $ npm install
